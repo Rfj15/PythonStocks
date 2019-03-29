@@ -5,20 +5,10 @@ import csv
 
 
 def update_tickers(ticker_filename, graph_filename, info_filename):
-    header = ['Time',
-              'Ticker',
-              'latestPrice',
-              'latestVolume',
-              'Close',
-              'Open',
-              'low',
-              'high']
-
     info = open(info_filename, "a")
 
-    with open(graph_filename, 'wt', newline='') as file:
+    with open(graph_filename, 'at', newline='') as file:
         writer = csv.writer(file, delimiter=',')
-        writer.writerow(i for i in header)
         file = open(ticker_filename, "r")
 
         for line in file:
@@ -49,17 +39,14 @@ def update_tickers(ticker_filename, graph_filename, info_filename):
 
 if __name__ == "__main__":
     # input seconds
-    # time_lim = int(input())
-    time_lim = 600
+    time_lim = int(input())
     minutes = time_lim / 60
 
     # filename where tickers are stored
-    # ticker_filename = input()
-    ticker_filename = "tickers.txt"
+    ticker_filename = input()
 
     # filename to write data to excel
-    # graph_filename = input()
-    graph_filename = "test.csv"
+     graph_filename = input()
 
     # filename to write query data
     info_filename = "info.txt"
@@ -73,6 +60,11 @@ if __name__ == "__main__":
               'low',
               'high']
 
+    with open(graph_filename, 'wt', newline='') as file:
+        writer = csv.writer(file, delimiter=',')
+        writer.writerow(i for i in header)
+        file.close()
+
     info = open(info_filename, "w")
 
     for label in header:
@@ -80,12 +72,11 @@ if __name__ == "__main__":
         info.write("\t")
     info.write("\n")
 
-    info.close()
-
     counter = 0
     while counter < minutes:
         if counter > 0:
-            time.sleep(60)
+            #time.sleep(60)
+            time.sleep(5)
         update_tickers(ticker_filename, graph_filename, info_filename)
         counter = counter + 1
 

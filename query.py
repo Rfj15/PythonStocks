@@ -1,12 +1,10 @@
 import time
 
 if __name__ == "__main__":
-    # info_filename = input()
-    info_filename = "info.txt"
-    # ticker = input()
-    ticker = "PIH"
-    # time = input()
-    time = "21:07"
+     info_filename = input()
+     ticker = input()
+     time = input()
+
 
     info = open(info_filename, "r")
 
